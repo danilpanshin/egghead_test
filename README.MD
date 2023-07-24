@@ -94,9 +94,12 @@ SELECT *
 FROM employees
 WHERE DepartamentId = 3 AND Salary > 90000;
 
+Если поле Salary имеет более высокую селективность (имеет много уникальных значений), 
+а поле DepartamentId менее селективно (имеет меньше уникальных значений), 
+то для оптимального использования индекса следует добавить поле Salary первым в составном индексе, а поле DepartamentId - вторым:
 
-CREATE INDEX idx_departament_id ON employees (DepartamentId);
-CREATE INDEX idx_salary ON employees (Salary);
+
+CREATE INDEX idx_salary_departament ON employees (Salary, DepartamentId);
 
 5.
 function printOrderTotal(responseString) {
